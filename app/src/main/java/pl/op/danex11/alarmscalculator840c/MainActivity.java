@@ -4,10 +4,15 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -35,8 +40,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
+        setContentView(R.layout.calculator);
+        // retain this fragment
 
 
         // initialize the Google Mobile Ads SDK
@@ -46,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onInitializationComplete(InitializationStatus initializationStatus) {
                 initializationDone = true;
-                Log.e(TAG, "initializationDone = true SEt");
+                Log.e(TAG, "initializationDone = true Set");
                 loadAd();
             }
         });
@@ -75,6 +80,25 @@ public class MainActivity extends AppCompatActivity {
             });
 */
 
+        final String[] result = {"waiting"};
+        // your text box
+        EditText alrmtyped = (EditText) findViewById(R.id.alarmtyped);
+
+        alrmtyped.setOnEditorActionListener(new EditText.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+
+                    CalculateAlarm calca = new CalculateAlarm(alrmtyped.getText().toString());
+                    result[0] = calca.getDbAddress();
+                    EditText resultETxt = findViewById(R.id.dbbresult);
+                    resultETxt.setText(result[0]);
+
+                    return true;
+                }
+                return false;
+            }
+        });
 
 
     }
@@ -130,6 +154,35 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+
+
+
+    public void Calculate(){
+        EditText result = findViewById(R.id.dbbresult);
+        result.setText("999");
+    }
+
+
+
+
+
+    public void loadCoffee(){
+        Intent myWebLink = new Intent(android.content.Intent.ACTION_VIEW);
+        myWebLink.setData(Uri.parse("https://buycoffee.to/danex11"));
+        startActivity(myWebLink);
+    }
+
+
+    public void loadBug(){
+
+    }
+
+
+
+
+
+
+
     @Override
     protected  void onResume(){
         super.onResume();
@@ -173,5 +226,10 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+
+
+
+
 
 }

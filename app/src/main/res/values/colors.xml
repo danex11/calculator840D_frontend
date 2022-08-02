@@ -10,5 +10,6 @@
     <color name = "sim_light_gray">#D7DEE9</color>
     <color name = "sim_very_dark_gray">#4A5563</color>
     <color name = "orange_dbb">#F8B84D</color>
+    <color name = "red_alarm">#FF0000</color>
 
 </resources>

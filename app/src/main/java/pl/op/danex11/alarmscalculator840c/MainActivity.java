@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -11,14 +12,18 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.android.gms.ads.AdError;
 import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.FullScreenContentCallback;
 import com.google.android.gms.ads.LoadAdError;
 import com.google.android.gms.ads.MobileAds;
@@ -35,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
     boolean initializationDone = false;
     String TAG = "tag";
     private RewardedAd mRewardedAd;
+    //private
     int adCounter = 0;
 
     @Override
@@ -43,6 +49,17 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.calculator);
         // retain this fragment
 
+       // AdView adView = new AdView(this);
+        //adView.setAdSize(AdSize.BANNER);
+       // adView.setAdUnitId("ca-app-pub-3940256099942544/6300978111");
+// TODO: Add adView to your view hierarchy.
+        /*
+        AdRequest adRequest = new AdRequest.Builder().build();
+        adView.loadAd(adRequest);
+// Place the ad view.
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+        //LinearLayout adContainer = <container>;
+        adContainer.addView(adView, params);
 
         // initialize the Google Mobile Ads SDK
         // initializes the SDK and calls back a completion listener once initialization is complete (or after a 30-second timeout).
@@ -52,9 +69,26 @@ public class MainActivity extends AppCompatActivity {
             public void onInitializationComplete(InitializationStatus initializationStatus) {
                 initializationDone = true;
                 Log.e(TAG, "initializationDone = true Set");
-                loadAd();
+                //loadad loads rewardedAd
+               // loadAd();
+
             }
         });
+         */
+        // AdMob 1 : add view
+        AdView mAdView = (AdView) findViewById(R.id.adView);
+        //AdMob 2 : initialize
+        //MobileAds.initialize(getApplicationContext(), "ca-app-pub-3940256099942544~3347511713");
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+        //AdMob 3 : request and load an ad
+        AdRequest adRequest = new AdRequest.Builder()
+                .build();
+        mAdView.loadAd(adRequest);
+
         /*
             //set fullscreen callback
             mRewardedAd.setFullScreenContentCallback(new FullScreenContentCallback() {
@@ -79,7 +113,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
 */
-
         final String[] result = {"waiting"};
         // your text box
         EditText alrmtyped = (EditText) findViewById(R.id.alarmtyped);
@@ -87,25 +120,26 @@ public class MainActivity extends AppCompatActivity {
         alrmtyped.setOnEditorActionListener(new EditText.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                //CLICKED Enter
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
 
                     CalculateAlarm calca = new CalculateAlarm(alrmtyped.getText().toString());
                     result[0] = calca.getDbAddress();
                     EditText resultETxt = findViewById(R.id.dbbresult);
                     resultETxt.setText(result[0]);
-
+                    closeKeyboard();
                     return true;
                 }
                 return false;
             }
         });
-
-
     }
 
 
-    void loadAd() {
 
+
+    //AD
+    void loadAd() {
         // IF (){}
         if (initializationDone == true) {
             Log.e(TAG, "initializationDone == true");
@@ -128,11 +162,8 @@ public class MainActivity extends AppCompatActivity {
                             showAd();
                         }
                     });
-
-
         }
     }
-
     void showAd(){
         //show the ad
         Log.e(TAG, "Show Ad block started");
@@ -149,35 +180,53 @@ public class MainActivity extends AppCompatActivity {
                     adCounter++;
                 }
             });
-        } else {
-            Log.e(TAG, "The rewarded ad wasn't ready yet.");
-        }
-    }
+        } else { Log.e(TAG, "The rewarded ad wasn't ready yet."); }
 
-
-
-
-    public void Calculate(){
-        EditText result = findViewById(R.id.dbbresult);
-        result.setText("999");
     }
 
 
 
 
 
-    public void loadCoffee(){
+
+
+    public void loadBug(View view){
+
+    }
+
+
+    public void loadCoffee(View view){
         Intent myWebLink = new Intent(android.content.Intent.ACTION_VIEW);
         myWebLink.setData(Uri.parse("https://buycoffee.to/danex11"));
         startActivity(myWebLink);
     }
 
 
-    public void loadBug(){
 
+
+    private void closeKeyboard()
+    {
+        // this will give us the view
+        // which is currently focus
+        // in this layout
+        View view = this.getCurrentFocus();
+
+        // if nothing is currently
+        // focus then this will protect
+        // the app from crash
+        if (view != null) {
+
+            // now assign the system
+            // service to InputMethodManager
+            InputMethodManager manager
+                    = (InputMethodManager)
+                    getSystemService(
+                            Context.INPUT_METHOD_SERVICE);
+            manager
+                    .hideSoftInputFromWindow(
+                            view.getWindowToken(), 0);
+        }
     }
-
-
 
 
 
@@ -226,10 +275,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-
-
-
-
 
 
 }

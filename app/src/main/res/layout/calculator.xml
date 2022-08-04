@@ -8,17 +8,7 @@
 
 
     <ImageView
-        android:id="@+id/rectimage2"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:src="@drawable/rectangle_sim_light_gray"
-        app:layout_constraintBottom_toBottomOf="@+id/rectimage"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"></ImageView>
-
-    <ImageView
-        android:id="@+id/rectimage"
+        android:id="@+id/rect_dark"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:src="@drawable/rectangle_sim_very_dark_gray"
@@ -30,11 +20,64 @@
         app:layout_constraintVertical_bias="0.0"></ImageView>
 
     <ImageView
+        android:id="@+id/rect_light"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/rectangle_sim_very_dark_gray"
+        app:layout_constraintBottom_toBottomOf="@+id/rect_dark"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"></ImageView>
+
+    <ImageView
+        android:id="@+id/rect_graygreen"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="-15dp"
+        android:src="@drawable/rectangle_graygreen"
+        app:layout_constraintBottom_toBottomOf="@+id/buttonbug4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"></ImageView>
+
+    <ImageView
+        android:id="@+id/rect_graygreen2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="-14dp"
+        android:src="@drawable/rectangle_graygreen"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/rect_dark"
+        app:layout_constraintStart_toStartOf="@+id/rect_dark2"
+        app:layout_constraintTop_toTopOf="parent"></ImageView>
+
+    <ImageView
+        android:id="@+id/rect_light2"
+        android:layout_width="0dp"
+        android:layout_height="350dp"
+        android:src="@drawable/rectangle_sim_light_gray"
+        app:layout_constraintEnd_toEndOf="@+id/rect_dark"
+        app:layout_constraintStart_toStartOf="@+id/rect_dark"
+        app:layout_constraintTop_toTopOf="@+id/background"></ImageView>
+
+    <ImageView
+        android:id="@+id/rect_dark2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/rectangle_sim_very_dark_gray"
+        app:layout_constraintBottom_toBottomOf="@+id/rect_light2"
+        app:layout_constraintEnd_toEndOf="@+id/rect_dark"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/background"
+        app:layout_constraintTop_toTopOf="@+id/background"></ImageView>
+
+    <ImageView
         android:id="@+id/background"
-        android:layout_width="404dp"
+        android:layout_width="360dp"
         android:layout_height="373dp"
-        android:layout_marginTop="4dp"
-        android:alpha=".25"
+        android:layout_marginTop="8dp"
+        android:alpha=".20"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -42,10 +85,10 @@
 
     <ImageView
         android:id="@+id/rectred"
-        android:layout_width="146dp"
-        android:layout_height="54dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="122dp"
+        android:layout_width="129dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="128dp"
         android:src="@drawable/rectangle_red"
         app:layout_constraintStart_toStartOf="@+id/background"
         app:layout_constraintTop_toTopOf="@+id/background"></ImageView>
@@ -70,35 +113,20 @@
 
     <ImageView
         android:id="@+id/rectorange"
-        android:layout_width="177dp"
-        android:layout_height="32dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="291dp"
+        android:layout_width="158dp"
+        android:layout_height="26dp"
+        android:layout_marginStart="9dp"
+        android:layout_marginTop="280dp"
         android:src="@drawable/rectangle_orange"
         app:layout_constraintStart_toStartOf="@+id/background"
         app:layout_constraintTop_toTopOf="@+id/background"></ImageView>
 
     <EditText
-        android:id="@+id/db2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="285dp"
-        android:clickable="false"
-        android:cursorVisible="false"
-        android:focusable="false"
-        android:inputType="number"
-        android:text="DB2."
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/background"
-        app:layout_constraintTop_toTopOf="@+id/background" />
-
-    <EditText
         android:id="@+id/dbbresult"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="51dp"
-        android:layout_marginTop="285dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="270dp"
         android:clickable="false"
         android:cursorVisible="true"
         android:ems="5"
@@ -109,25 +137,54 @@
         app:layout_constraintStart_toStartOf="@+id/background"
         app:layout_constraintTop_toTopOf="@+id/background" />
 
-    <TextView
-        android:id="@+id/versionlabel"
+    <EditText
+        android:id="@+id/db2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="290dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="270dp"
         android:clickable="false"
         android:cursorVisible="false"
         android:focusable="false"
-        android:text="0.0.0.VRS"
-        android:textColor="#000000"
+        android:inputType="number"
+        android:text="DB2."
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/background"
         app:layout_constraintTop_toTopOf="@+id/background" />
 
+    <TextView
+        android:id="@+id/versionlabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="252dp"
+        android:layout_marginTop="24dp"
+        android:clickable="false"
+        android:cursorVisible="false"
+        android:focusable="false"
+        android:text="0.0.0.VRS"
+        android:textColor="#454040"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/background"
+        app:layout_constraintTop_toTopOf="@+id/background" />
+
+    <FrameLayout
+        android:id="@+id/framelayout"
+        android:layout_width="0dp"
+        android:layout_height="1000dp"
+        android:layout_marginTop="28dp"
+        android:onClick="removeInfo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/rect_light"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </FrameLayout>
+
     <ImageButton
         android:id="@+id/buttoncoffee"
         style="@android:style/Widget.DeviceDefault.ImageButton"
-        android:layout_width="80dp"
+        android:layout_width="72dp"
         android:layout_height="60dp"
         android:background="@drawable/button_inactive_background"
         android:elevation="10dp"
@@ -142,7 +199,7 @@
 
     <ImageButton
         android:id="@+id/buttoninfo"
-        android:layout_width="80dp"
+        android:layout_width="72dp"
         android:layout_height="60dp"
         android:background="@drawable/button_inactive_background"
         android:elevation="10dp"
@@ -157,7 +214,7 @@
 
     <ImageButton
         android:id="@+id/buttonbug2"
-        android:layout_width="80dp"
+        android:layout_width="72dp"
         android:layout_height="60dp"
         android:layout_marginTop="1dp"
         android:alpha="0.6"
@@ -173,7 +230,7 @@
 
     <ImageButton
         android:id="@+id/buttonbug4"
-        android:layout_width="80dp"
+        android:layout_width="72dp"
         android:layout_height="60dp"
         android:layout_marginTop="1dp"
         android:alpha="0.6"
@@ -187,7 +244,7 @@
 
     <ImageButton
         android:id="@+id/buttonbug"
-        android:layout_width="80dp"
+        android:layout_width="72dp"
         android:layout_height="60dp"
         android:background="@drawable/button_inactive_background"
         android:elevation="10dp"
@@ -205,28 +262,18 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        app:adSize="BANNER"
-        app:adUnitId="ca-app-pub-3940256099942544/6300978111"
+        app:adSize="SMART_BANNER"
+        app:adUnitId="/6499/example/banner"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"></com.google.android.gms.ads.AdView>
 
-    <FrameLayout
-        android:id="@+id/framelayout"
-        android:layout_width="0dp"
-        android:layout_height="1000dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="8dp"
-        android:onClick="removeInfo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/rectimage2"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/rectimage2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-    </FrameLayout>
+    <!--
+            ca-app-pub-9180007219356993/7676192654
+            -->
+    <!--
+        /6499/example/banner
+    -->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

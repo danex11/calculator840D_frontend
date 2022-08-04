@@ -17,6 +17,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleObserver;
+import androidx.lifecycle.OnLifecycleEvent;
+import androidx.lifecycle.ProcessLifecycleOwner;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -41,6 +45,12 @@ public class MainActivity extends AppCompatActivity {
         Log.w("logtag", "Log");
       //  Log.v("lineseparatoris", System.getProperty("line.separator"));
         super.onCreate(savedInstanceState);
+
+        //Detect app going to background, foreground
+        AppLifecycleObserver appLifecycleObserver = new AppLifecycleObserver();
+        ProcessLifecycleOwner.get().getLifecycle().addObserver(appLifecycleObserver);
+        appLifecycleObserver.onEnterForeground();
+
         setContentView(R.layout.calculator);
         //Alarm enter view
         EditText alrmtyped = (EditText) findViewById(R.id.alarmtyped);
@@ -88,16 +98,15 @@ public class MainActivity extends AppCompatActivity {
                 //CLICKED Enter
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
                     String alarm = checkAlarmErrors(alrmtyped.getText().toString());
+
+
                     //vvvvvvvvvvvv
                     CalculateAlarm calca = new CalculateAlarm(alarm);
-                    //show ad
-                    mAdView.loadAd(adRequest);
                     //^^^^^^^^^^^^
                     result[0] = calca.getDbAddress();
                     EditText resultETxt = findViewById(R.id.dbbresult);
                     resultETxt.setText(result[0]);
-                    //closeKeyboard();
-                    //hideSoftKeyboard(alrmtyped);
+
                     return true;
                 }
                 return false;
@@ -130,12 +139,20 @@ public class MainActivity extends AppCompatActivity {
         Log.w("logtag","typed " +  alarmtyped);
         boolean wrongAlert = false;
 
+        if (alarmtyped.length()!=6)
+        {Toast.makeText(MainActivity.this, "Alarm - needs to be 6 digits long.", Toast.LENGTH_LONG).show();
+        wrongAlert = true;
+        alarmtyped = "000000";
+        return alarmtyped;}
+
         String digs12 = alarmtyped.substring(0,2);
         Log.w("logtag","digs12 " +  digs12);
         if (!digs12.equals("50") && !digs12.equals("51") && !digs12.equals("52") && !digs12.equals("53") && !digs12.equals("54") && !digs12.equals("55") && !digs12.equals("56") && !digs12.equals("57") && !digs12.equals("58")
                 && !digs12.equals("60") && !digs12.equals("70"))
         { Toast.makeText(MainActivity.this, "Alarm - first two digits wrong.", Toast.LENGTH_LONG).show();
-        wrongAlert = true;}
+        wrongAlert = true;
+        alarmtyped = "000000";
+        return alarmtyped;}
 
         String dig3 = alarmtyped.substring(2,3);
         Log.w("logtag","dig3 " +  dig3);
@@ -150,7 +167,7 @@ public class MainActivity extends AppCompatActivity {
             ||
                 (digs12.equals("60") && Integer.parseInt(digs34)>18)
             ||
-                digs12.equals("50") && !digs34.equals("01") && !digs34.equals("02") && !digs34.equals("03") && !digs34.equals("11") && !digs34.equals("12") && !digs34.equals("13") )
+                digs12.equals("50") && !digs34.equals("00") && !digs34.equals("01") && !digs34.equals("02") && !digs34.equals("03") && !digs34.equals("11") && !digs34.equals("12") && !digs34.equals("13") )
         { Toast.makeText(MainActivity.this, "Alarm - third/fourth digits incorrect.", Toast.LENGTH_LONG).show();
         wrongAlert = true; }
 
@@ -161,14 +178,24 @@ public class MainActivity extends AppCompatActivity {
                     (digs12.equals("60") && Integer.parseInt(digs56)>15)
                     ||
                     digs12.equals("50") && Integer.parseInt(digs56)>63 )
-        { Toast.makeText(MainActivity.this, "Alarm - fifth and sisth digit too high.", Toast.LENGTH_LONG).show();
+        { Toast.makeText(MainActivity.this, "Alarm - fifth and sixth digits too high.", Toast.LENGTH_LONG).show();
         wrongAlert = true; }
 
-        if (wrongAlert){alarmtyped = "000000"; }
-        if (alarmtyped!="000000"){
-            Toast.makeText(MainActivity.this, "OK!.", Toast.LENGTH_LONG).show();
+        if (wrongAlert)
+            {alarmtyped = "000000"; }
+        if (!wrongAlert){
+            //OK!
+            //CALCULATE
+            //hideSoftKeyboard(this.getCurrentFocus());
+            Toast.makeText(MainActivity.this, "OK !", Toast.LENGTH_LONG).show();
+            closeKeyboard();
+            EditText alrmtyped = (EditText) findViewById(R.id.alarmtyped);
+            hideSoftKeyboard(alrmtyped);
+            //show ad
+            AdView mAdView = (AdView) findViewById(R.id.adView);
+            AdRequest adRequest = new AdRequest.Builder().build();
+            mAdView.loadAd(adRequest);
         }
-
         return alarmtyped;
     }
 
@@ -177,10 +204,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void loadBug(View view){
         Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
-                "mailto","email@email.com", null));
-        intent.putExtra(Intent.EXTRA_SUBJECT, "@string/emsubject");
-        intent.putExtra(Intent.EXTRA_TEXT, "@string/emmessage");
-        startActivity(Intent.createChooser(intent, "Choose an Email client :"));
+                "mailto","alarmscalc840d.userreport@gmail.com", null));
+        intent.putExtra(Intent.EXTRA_SUBJECT, getResources().getString(R.string.emsubject));
+        intent.putExtra(Intent.EXTRA_TEXT, getResources().getString(R.string.emmessage));
+        startActivity(Intent.createChooser(intent, "Choose an Email client to report bugs and observations:"));
     }
 
 
@@ -198,6 +225,8 @@ public class MainActivity extends AppCompatActivity {
         View viewL  =
                 inflater.inflate(R.layout.infolayout,framelayout,false);
         framelayout.addView(viewL);
+       // .(fireText.replace("\\n", "\n"));
+        //        setText(findViewById(R.string.info).replace("\\n", "\n"));;
     }
 
     public void removeInfo(View view) {
@@ -234,54 +263,53 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        EditText alrmtyped = (EditText) findViewById(R.id.alarmtyped);
+        //hide keyboard
+        hideSoftKeyboard(alrmtyped);
+        //load new ad
+        AdView mAdView = (AdView) findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder()
+                .build();
+        mAdView.loadAd(adRequest);
+    }
+
+
+
+    public class AppLifecycleObserver implements LifecycleObserver {
+
+        //public  final String TAG = pl.op.danex11.alarmscalculator840c.AppLifecycleObserver.class.getName();
+
+        @OnLifecycleEvent(Lifecycle.Event.ON_START)
+        public void onEnterForeground() {
+            //run the code we need
+            closeKeyboard();
+            EditText alrmtyped = (EditText) findViewById(R.id.alarmtyped);
+            View current = getCurrentFocus();
+            if (current != null) current.clearFocus();
+           // hideSoftKeyboard(alrmtyped);
+
+        }
+
+        @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
+        public void onEnterBackground() {
+            //run the code we need
+        }
+
+    }
+
+
+
+
+
+
 
 
     @Override
     protected  void onResume(){
         super.onResume();
-        EditText alrmtyped = (EditText) findViewById(R.id.alarmtyped);
-
-
-        //TODO hide keyboard, load new ad
-//        //Layout params
-//        RelativeLayout layout = new RelativeLayout(this);
-//        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
-//        params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM,RelativeLayout.TRUE);
-//        params.addRule(RelativeLayout.CENTER_HORIZONTAL, RelativeLayout.TRUE);
-//        layout.setLayoutParams(params);
-//        //set layout
-//        //setContentView(layout);
-//
-//        TextView textview = new TextView(this);
-//        textview.setText("Number of completely watched rewarded ads: " + adCounter);
-//        textview.setTextSize(15);
-//        //add textview to layout
-//        layout.addView(textview);
-//
-//        //load ad button
-//        Button button = new Button(this);
-//        button.setText("Watch");
-//        button.setPadding(0,100,0,0);
-//        RelativeLayout.LayoutParams buttonParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-//        buttonParams.addRule(RelativeLayout.CENTER_VERTICAL,RelativeLayout.TRUE);
-//        buttonParams.addRule(RelativeLayout.CENTER_HORIZONTAL, RelativeLayout.TRUE);
-//        layout.addView(button,buttonParams);
-//        //loading ad progress bar
-//        ProgressBar progressBar = new ProgressBar(this, null, android.R.attr.progressBarStyleLarge);
-//        layout.addView(progressBar);
-//        progressBar.setVisibility(View.INVISIBLE);
-//        button.setOnClickListener(new View.OnClickListener() {
-//            public void onClick(View v) {
-//                // Do something in response to button click
-//                progressBar.setVisibility(View.VISIBLE);
-//                loadAd();
-//            }
-//        });
-
-
-
-
-
     }
 
 

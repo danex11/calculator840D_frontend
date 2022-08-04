@@ -3,16 +3,19 @@
     <string name="app_name">Alarms Calculator 840D</string>
     <string name="version">0.0.0</string>
     <string name="todo">TODO</string>
-    <string name="info">
-        To calculate alarm, type it into red rectangle, confirm typing, result will be visible in orange rectangle. <br/>
-        It assumes that bitExtended is set to "false"   <br/>
-        2022.08 <br/>
-                <br/>
-            Report problems, bugs and suggestion with "Bug" button. <br/>
-            Like this app? Please rate it on Playstore. <br/>
-            Support me with "Buy me a coffee" button :) <br/>
-        Have a nice and easy day at work! <br/>
+    <string name="info">"
+To calculate alarm: type it into red rectangle and confirm.
+Result will be shown in an orange rectangle.
+It assumes that bitExtended is set to "false".
+Supports alarms starting with 50, 60, 70.
+Report problems, bugs and suggestion with \"Bug\" button.
+
+        Like this app? Rate it on Playstore.
+        Support me with \"Buy me a coffee\" button :)
+        Have a nice day at work!
+        danex11"
     </string>
     <string name="emmessage">This is my observation:</string>
-    <string name="emsubject">user report :: codeF3#41795CA3Ad23D</string>
+    <string name="emsubject">do not modify email subject [CODE::840Df171098aFb9012667846ecE5fA]</string>
+    <string name="dialogemail">Choose an Email client to report bugs and observations:</string>
 </resources>

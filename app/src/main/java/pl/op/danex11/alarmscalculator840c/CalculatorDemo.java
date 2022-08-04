@@ -32,9 +32,9 @@ class CalculateAlarm {
          dbaddress = group60(digs34, digs56);
 
      }
-    else if (new String(chars12).equals("50"))
+    else if (new String(chars12).equals("50") || (chars12).equals("51")|| (chars12).equals("52")|| (chars12).equals("53")|| (chars12).equals("54")|| (chars12).equals("55"))
     {
-        dbaddress="TODO group 50";
+        dbaddress=group50(digs34,digs56);
     }   
     else { dbaddress="not found";}
  }
@@ -64,8 +64,59 @@ class CalculateAlarm {
         return bb;
     }
 
-    public void group50(int digs34, int digs567)
+    public String group50(int digs34, int digs56)
     {
+        //group 50
+        int byte50 = 0;
+        int bit50;
+        boolean wrongdata = false;
+        String dig34string = Integer.toString(digs34);
+        Log.w("logtag", "dig34string: " + dig34string);
+        //revert zero that dissapeard on conversion to Int for numbers like "02"
+        if(dig34string.length() == 1){dig34string = "0" + dig34string;}
+        Log.w("logtag", "dig34stringappended: " + dig34string);
+        String dig3 = dig34string.substring(0,1);
+        Log.w("logtag","dig3: " + dig3);
+        String dig4 = dig34string.substring(1,2);
+        Log.w("logtag","dig4: " + dig4);
+
+        //String dig56 = Integer.toString(digs56).substring(4, 6);
+
+
+        if (dig3.equals("0")){
+            if (digs56 > 30) {
+                wrongdata = true;
+            }
+            Log.w("logtag","0dig4: " + dig4);
+            if (dig4.equals("0")){byte50=0;}
+            if (dig4.equals("1")){byte50=2;}
+            if (dig4.equals("2")){byte50=6;}
+            if (dig4.equals("3")){byte50=10;}
+        }
+
+        if (dig3.equals("1")){
+            if (digs56 > 15) {
+                wrongdata = true;
+            }
+            Log.w("logtag","1dig4:" + dig4);
+            if (dig4.equals("0")){byte50=12;}
+            if (dig4.equals("1")){byte50=14;}
+            if (dig4.equals("2")){byte50=16;}
+
+        }
+
+        int bytebydigs56 = (digs56/8);
+        byte50 +=bytebydigs56;
+
+        bit50 = digs56%8;
+
+        String bb = String.format("DBX%3d.%2d", byte50, bit50);
+
+        return bb;
+
+
+
+
 
     }
 }

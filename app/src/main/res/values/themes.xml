@@ -2,8 +2,8 @@
     <!-- Base application theme. -->
     <style name="Theme.AlarmsCalculator840C" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/orange_dbb</item>
-        <item name="colorPrimaryVariant">@color/orange_dbb</item>
+        <item name="colorPrimary">@color/sim_very_dark_gray</item>
+        <item name="colorPrimaryVariant">@color/case_graygreen</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>

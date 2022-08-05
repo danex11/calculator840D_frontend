@@ -11,7 +11,7 @@ android {
         //AdMob requires minSdkVersion API 16 or higher
 
         minSdkVersion 23
-        targetSdkVersion 30
+        targetSdkVersion 31
         versionCode 1
         versionName = "@string/version"
 
@@ -21,8 +21,17 @@ android {
     //minify and proguard, obfuscation..
     buildTypes {
         release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            // Enables code shrinking, obfuscation, and optimization for only
+            // your project's release build type.
+            minifyEnabled true
+            // Enables resource shrinking, which is performed by the
+            // Android Gradle plugin.
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'),
+            // List additional ProGuard rules for the given build type here. By default,
+            // Android Studio creates and includes an empty rules file for you (located
+            // at the root directory of each module).
+            'proguard-rules.pro'
         }
     }
     compileOptions {

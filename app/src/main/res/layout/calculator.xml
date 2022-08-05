@@ -13,64 +13,10 @@
         android:layout_height="0dp"
         android:src="@drawable/rectangle_sim_very_dark_gray"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/background"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"></ImageView>
-
-    <ImageView
-        android:id="@+id/rect_light"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:src="@drawable/rectangle_sim_very_dark_gray"
-        app:layout_constraintBottom_toBottomOf="@+id/rect_dark"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"></ImageView>
-
-    <ImageView
-        android:id="@+id/rect_graygreen"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="-15dp"
-        android:src="@drawable/rectangle_graygreen"
-        app:layout_constraintBottom_toBottomOf="@+id/buttonbug4"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"></ImageView>
-
-    <ImageView
-        android:id="@+id/rect_graygreen2"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="-14dp"
-        android:src="@drawable/rectangle_graygreen"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/rect_dark"
-        app:layout_constraintStart_toStartOf="@+id/rect_dark2"
-        app:layout_constraintTop_toTopOf="parent"></ImageView>
-
-    <ImageView
-        android:id="@+id/rect_light2"
-        android:layout_width="0dp"
-        android:layout_height="350dp"
-        android:src="@drawable/rectangle_sim_light_gray"
-        app:layout_constraintEnd_toEndOf="@+id/rect_dark"
-        app:layout_constraintStart_toStartOf="@+id/rect_dark"
-        app:layout_constraintTop_toTopOf="@+id/background"></ImageView>
-
-    <ImageView
-        android:id="@+id/rect_dark2"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:src="@drawable/rectangle_sim_very_dark_gray"
-        app:layout_constraintBottom_toBottomOf="@+id/rect_light2"
-        app:layout_constraintEnd_toEndOf="@+id/rect_dark"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/background"
-        app:layout_constraintTop_toTopOf="@+id/background"></ImageView>
 
     <ImageView
         android:id="@+id/background"
@@ -174,9 +120,6 @@
         android:layout_marginTop="28dp"
         android:onClick="removeInfo"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/rect_light"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
     </FrameLayout>
@@ -263,7 +206,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         app:adSize="SMART_BANNER"
-        app:adUnitId="/6499/example/banner"
+        app:adUnitId="ca-app-pub-9180007219356993/7676192654"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"></com.google.android.gms.ads.AdView>

@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
 
         //AD    AD  AD
         // AdMob 1 : add view
-        AdView mAdView = (AdView) findViewById(R.id.adView);
+        //AdView mAdView = (AdView) findViewById(R.id.adView);
         //AdMob 2 : initialize
         //MobileAds.initialize(getApplicationContext(), "ca-app-pub-3940256099942544~3347511713");
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
@@ -86,8 +86,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         //AdMob 3 : request and load an ad
-        AdRequest adRequest = new AdRequest.Builder()
-                .build();
+        // AdRequest adRequest = new AdRequest.Builder().build();
         //mAdView.loadAd(adRequest);
 
 
@@ -115,42 +114,40 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
-    public void hideSoftKeyboard(View view){
-        InputMethodManager imm =(InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+    public void hideSoftKeyboard(View view) {
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
-    public void showSoftKeyboard(View view){
-        Log.w("logtag", "showkeyboard");
-        view.requestFocus();
-        if(view.requestFocus()){
-            Log.w("logtag", "requestfocus");
-            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-            Log.w("logtag", "imm" + imm);
-            imm.showSoftInput(view,InputMethodManager.SHOW_IMPLICIT);
-        }
-    }
+//    public void showSoftKeyboard(View view){
+//        Log.w("logtag", "showkeyboard");
+//        view.requestFocus();
+//        if(view.requestFocus()){
+//            Log.w("logtag", "requestfocus");
+//            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+//            Log.w("logtag", "imm" + imm);
+//            imm.showSoftInput(view,InputMethodManager.SHOW_IMPLICIT);
+//        }
+//    }
 
 
-
-
-    public String checkAlarmErrors(String alarmtyped){
-        Log.w("logtag","typed " +  alarmtyped);
+    public String checkAlarmErrors(String alarmtyped) {
+        Log.w("logtag", "typed " + alarmtyped);
         boolean wrongAlert = false;
 
-        if (alarmtyped.length()!=6)
-        {Toast.makeText(MainActivity.this, "Alarm - needs to be 6 digits long.", Toast.LENGTH_LONG).show();
-        wrongAlert = true;
-        alarmtyped = "000000";
-        return alarmtyped;}
+        if (alarmtyped.length() != 6) {
+            Toast.makeText(MainActivity.this, "Alarm - needs to be 6 digits long.", Toast.LENGTH_LONG).show();
+            wrongAlert = true;
+            alarmtyped = "000000";
+            return alarmtyped;
+        }
 
-        String digs12 = alarmtyped.substring(0,2);
-        Log.w("logtag","digs12 " +  digs12);
+        String digs12 = alarmtyped.substring(0, 2);
+        Log.w("logtag", "digs12 " + digs12);
         if (!digs12.equals("50") && !digs12.equals("51") && !digs12.equals("52") && !digs12.equals("53") && !digs12.equals("54") && !digs12.equals("55") && !digs12.equals("56") && !digs12.equals("57") && !digs12.equals("58")
-                && !digs12.equals("60") && !digs12.equals("70"))
-        { Toast.makeText(MainActivity.this, "Alarm - first two digits wrong.", Toast.LENGTH_LONG).show();
-        wrongAlert = true;
+                && !digs12.equals("60") && !digs12.equals("70")) {
+            Toast.makeText(MainActivity.this, "Alarm - first two digits wrong.", Toast.LENGTH_LONG).show();
+            wrongAlert = true;
         alarmtyped = "000000";
         return alarmtyped;}
 
@@ -289,29 +286,15 @@ public class MainActivity extends AppCompatActivity {
             EditText alrmtyped = (EditText) findViewById(R.id.alarmtyped);
             View current = getCurrentFocus();
             if (current != null) current.clearFocus();
-           // hideSoftKeyboard(alrmtyped);
+            // hideSoftKeyboard(alrmtyped);
 
         }
 
-        @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
-        public void onEnterBackground() {
-            //run the code we need
-        }
+//        @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
+//        public void onEnterBackground() {
+//            //run the code we need
+//        }
 
     }
-
-
-
-
-
-
-
-
-    @Override
-    protected  void onResume(){
-        super.onResume();
-    }
-
-
 
 }

@@ -3,39 +3,27 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
     android:windowSoftInputMode="stateVisible">
 
 
     <ImageView
-        android:id="@+id/rect_dark"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:src="@drawable/rectangle_sim_very_dark_gray"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"></ImageView>
-
-    <ImageView
         android:id="@+id/background"
         android:layout_width="360dp"
-        android:layout_height="373dp"
+        android:layout_height="343dp"
         android:layout_marginTop="8dp"
         android:alpha=".20"
+        android:background="@drawable/widok840narrow"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/widok840narrow" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/rectred"
         android:layout_width="129dp"
         android:layout_height="50dp"
         android:layout_marginStart="2dp"
-        android:layout_marginTop="128dp"
-        android:src="@drawable/rectangle_red"
+        android:layout_marginTop="113dp"
+        android:background="@drawable/rectangle_red"
         app:layout_constraintStart_toStartOf="@+id/background"
         app:layout_constraintTop_toTopOf="@+id/background"></ImageView>
 
@@ -44,7 +32,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
-        android:layout_marginTop="120dp"
+        android:layout_marginTop="110dp"
         android:hint="alarm..."
         android:imeOptions="actionDone"
         android:inputType="number"
@@ -59,11 +47,11 @@
 
     <ImageView
         android:id="@+id/rectorange"
-        android:layout_width="158dp"
+        android:layout_width="157dp"
         android:layout_height="26dp"
         android:layout_marginStart="9dp"
-        android:layout_marginTop="280dp"
-        android:src="@drawable/rectangle_orange"
+        android:layout_marginTop="268dp"
+        android:background="@drawable/rectangle_orange"
         app:layout_constraintStart_toStartOf="@+id/background"
         app:layout_constraintTop_toTopOf="@+id/background"></ImageView>
 
@@ -72,7 +60,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="56dp"
-        android:layout_marginTop="270dp"
+        android:layout_marginTop="258dp"
         android:clickable="false"
         android:cursorVisible="true"
         android:ems="5"
@@ -88,7 +76,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="270dp"
+        android:layout_marginTop="258dp"
         android:clickable="false"
         android:cursorVisible="false"
         android:focusable="false"
@@ -103,11 +91,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="252dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="8dp"
         android:clickable="false"
         android:cursorVisible="false"
         android:focusable="false"
-        android:text="0.0.0.VRS"
+        android:text="@string/versionVRS"
         android:textColor="#454040"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/background"
@@ -206,7 +194,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         app:adSize="SMART_BANNER"
-        app:adUnitId="ca-app-pub-9180007219356993/7676192654"
+        app:adUnitId="/6499/example/banner4"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"></com.google.android.gms.ads.AdView>

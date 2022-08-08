@@ -1,6 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Theme.AlarmsCalculator840C" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:windowBackground">@drawable/rectangle_sim_very_dark_gray</item>
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/sim_very_dark_gray</item>
         <item name="colorPrimaryVariant">@color/case_graygreen</item>

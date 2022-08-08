@@ -16,12 +16,12 @@
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-9180007219356993~5642994057" />
-        <activity android:name=".MainActivity"
-            android:screenOrientation="portrait" >
-
+        <activity
+            android:name="pl.op.danex11.alarmscalculator840c.MainActivity"
+            android:exported="true"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

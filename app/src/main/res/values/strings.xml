@@ -1,7 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?><!-- version-->
+<!DOCTYPE resources [<!ENTITY vers "0.0.1">]>
+
 <resources>
     <string name="app_name">Alarms Calculator 840D</string>
-    <string name="version">0.0.0</string>
+    <string name="version">&vers;</string>
+    <string name="versionVRS">&vers;.VRS </string>
     <string name="todo">TODO</string>
     <string name="info">"
 To calculate alarm: type it into red rectangle and confirm.

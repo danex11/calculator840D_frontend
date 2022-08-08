@@ -23,20 +23,16 @@ class CalculateAlarm {
     int digs56 = Integer.valueOf(chars56s);
 
 
-     if (new String(chars12).equals("70"))
-     {
+     if (chars12.equals("70")) {
          dbaddress = group70(digs34, digs56);
-     }
-     else if (new String(chars12).equals("60"))
-     {
+     } else if (chars12.equals("60")) {
          dbaddress = group60(digs34, digs56);
 
+     } else if (chars12.equals("50") || (chars12).equals("51") || (chars12).equals("52") || (chars12).equals("53") || (chars12).equals("54") || (chars12).equals("55")) {
+         dbaddress = group50(digs34, digs56);
+     } else {
+         dbaddress = "not found";
      }
-    else if (new String(chars12).equals("50") || (chars12).equals("51")|| (chars12).equals("52")|| (chars12).equals("53")|| (chars12).equals("54")|| (chars12).equals("55"))
-    {
-        dbaddress=group50(digs34,digs56);
-    }   
-    else { dbaddress="not found";}
  }
 
 

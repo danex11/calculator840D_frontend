@@ -1,11 +1,12 @@
 package pl.op.danex11.alarmscalculator840c;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.text.InputType;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -18,17 +19,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Lifecycle;
-import androidx.lifecycle.LifecycleObserver;
-import androidx.lifecycle.OnLifecycleEvent;
-import androidx.lifecycle.ProcessLifecycleOwner;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.RequestConfiguration;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
 
@@ -40,62 +40,28 @@ public class MainActivity extends AppCompatActivity {
     final String[] result = {"waiting"};
 
     //Detect app going to background, foreground
-    AppLifecycleObserver appLifecycleObserver = new AppLifecycleObserver();
+    //AppLifecycleObserver appLifecycleObserver = new AppLifecycleObserver();
 
     //Alarm enter view
     EditText alrmtyped;
     FrameLayout framelayout;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        //showKeyboard();
-        //  Log.v("lineseparatoris", System.getProperty("line.separator"));
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.calculator);
+    List<String> testDeviceIds = Arrays.asList("BE1C908D4C08BF07D2D06FB52FFC9020");
+    RequestConfiguration configuration =
+            new RequestConfiguration.Builder().setTestDeviceIds(testDeviceIds).build();
 
-
-        new Handler().postDelayed(() -> { //your code
-            //Detect app going to background, foreground
-            ProcessLifecycleOwner.get().getLifecycle().addObserver(appLifecycleObserver);
-            appLifecycleObserver.onEnterForeground();
-
-            //Alarm enter view
-            alrmtyped = findViewById(R.id.alarmtyped);
-            alrmtyped.setInputType(InputType.TYPE_CLASS_NUMBER);
-            // alrmtyped.requestFocus();
-            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.SHOW_IMPLICIT);
-            // imm.showSoftInput(alrmtyped,InputMethodManager.SHOW_IMPLICIT);
-
-            //ENTER     ENTER   ENTER   ENTER
-            alrmtyped.setOnEditorActionListener(new EditText.OnEditorActionListener() {
-                @Override
-                public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                    //CLICKED Enter
-                    if (actionId == EditorInfo.IME_ACTION_DONE) {
-                        String alarm = checkAlarmErrors(alrmtyped.getText().toString());
-
-                        //vvvvvvvvvvvv
-                        CalculateAlarm calca = new CalculateAlarm(alarm);
-                        //^^^^^^^^^^^^
-                        result[0] = calca.getDbAddress();
-                        EditText resultETxt = findViewById(R.id.dbbresult);
-                        resultETxt.setText(result[0]);
-
-                        return true;
-                    }
-                    return false;
-                }
-            });
-        }, 400);
-
+    public static void hideSoftwareKeyboard(Activity activity) {
+        InputMethodManager inputMethodManager =
+                (InputMethodManager) activity.getSystemService(
+                        Activity.INPUT_METHOD_SERVICE);
+        if (inputMethodManager.isAcceptingText()) {
+            inputMethodManager.hideSoftInputFromWindow(
+                    activity.getCurrentFocus().getWindowToken(),
+                    0
+            );
+        }
     }
 
-
-    public void hideSoftKeyboard(View view) {
-        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-    }
 
 //    public void showSoftKeyboard(View view){
 //        Log.w("logtag", "showkeyboard");
@@ -108,6 +74,55 @@ public class MainActivity extends AppCompatActivity {
 //        }
 //    }
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        //Toast.makeText(MainActivity.this, "onCreate()", Toast.LENGTH_LONG).show();
+
+        //showKeyboard();
+        //  Log.v("lineseparatoris", System.getProperty("line.separator"));
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.calculator);
+        //background
+        //ColorDrawable transp = new ColorDrawable();
+        int vdarkgray = getResources().getColor(R.color.sim_very_dark_gray);
+        ColorDrawable backgr_vdarkgray = new ColorDrawable(vdarkgray);
+        getWindow().setBackgroundDrawable(backgr_vdarkgray);
+
+
+        new Handler().postDelayed(() -> { //your code
+            //Detect app going to background, foreground
+            //  ProcessLifecycleOwner.get().getLifecycle().addObserver(appLifecycleObserver);
+
+            //Alarm enter view
+            alrmtyped = findViewById(R.id.alarmtyped);
+//            alrmtyped.setInputType(InputType.TYPE_CLASS_NUMBER);
+            alrmtyped.requestFocus();
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            //imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.SHOW_IMPLICIT);
+            imm.showSoftInput(alrmtyped, InputMethodManager.SHOW_IMPLICIT);
+
+
+            //ENTER     ENTER   ENTER   ENTER
+            alrmtyped.setOnEditorActionListener(new EditText.OnEditorActionListener() {
+                @Override
+                public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                    //CLICKED Enter
+                    if (actionId == EditorInfo.IME_ACTION_DONE) {
+                        String alarm = checkAlarmErrors(alrmtyped.getText().toString());
+                        //vvvvvvvvvvvv
+                        CalculateAlarm calca = new CalculateAlarm(alarm);
+                        //^^^^^^^^^^^^
+                        result[0] = calca.getDbAddress();
+                        EditText resultETxt = findViewById(R.id.dbbresult);
+                        resultETxt.setText(result[0]);
+                        return true;
+                    }
+                    return false;
+                }
+            });
+        }, 500);
+
+    }
 
     public String checkAlarmErrors(String alarmtyped) {
         Log.w("logtag", "typed " + alarmtyped);
@@ -168,15 +183,22 @@ public class MainActivity extends AppCompatActivity {
             //CALCULATE
             //hideSoftKeyboard(this.getCurrentFocus());
             Toast.makeText(MainActivity.this, "OK !", Toast.LENGTH_LONG).show();
-            closeKeyboard();
             EditText alrmtyped = findViewById(R.id.alarmtyped);
             hideSoftKeyboard(alrmtyped);
             //show ad
             AdView mAdView = findViewById(R.id.adView);
             AdRequest adRequest = new AdRequest.Builder().build();
             mAdView.loadAd(adRequest);
+            Log.w("logtag", "adloaded!!!!");
         }
         return alarmtyped;
+    }
+
+    public void hideSoftKeyboard(View view) {
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        // imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, InputMethodManager.H);
+        // imm.hideSoftInputFromWindow(alrmtyped,InputMethodManager.HIDE_NOT_ALWAYS);
     }
 
 
@@ -214,88 +236,130 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void closeKeyboard() {
-        // this will give us the view
-        // which is currently focus
-        // in this layout
-        View view = this.getCurrentFocus();
+//    private void closeKeyboard() {
+//        // this will give us the view
+//        // which is currently focus
+//        // in this layout
+//        View view = this.getCurrentFocus();
+//
+//        // if nothing is currently
+//        // focus then this will protect
+//        // the app from crash
+//        if (view != null) {
+//
+//            // now assign the system
+//            // service to InputMethodManager
+//            InputMethodManager manager
+//                    = (InputMethodManager)
+//                    getSystemService(
+//                            Context.INPUT_METHOD_SERVICE);
+//            manager
+//                    .hideSoftInputFromWindow(
+//                            view.getWindowToken(), 0);
+//        }
+//    }
 
-        // if nothing is currently
-        // focus then this will protect
-        // the app from crash
-        if (view != null) {
-
-            // now assign the system
-            // service to InputMethodManager
-            InputMethodManager manager
-                    = (InputMethodManager)
-                    getSystemService(
-                            Context.INPUT_METHOD_SERVICE);
-            manager
-                    .hideSoftInputFromWindow(
-                            view.getWindowToken(), 0);
-        }
-    }
-
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        EditText alrmtyped = findViewById(R.id.alarmtyped);
-        //hide keyboard
-        hideSoftKeyboard(alrmtyped);
-        //load new ad
-        AdView mAdView = findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder()
-                .build();
-        mAdView.loadAd(adRequest);
-    }
 
     @Override
     protected void onResume() {
         super.onResume();
-
         new Handler().postDelayed(() -> { //your code
             framelayout = findViewById(R.id.framelayout);
             framelayout.setTranslationZ(-10);
 
-            //AD    AD  AD
-            // AdMob 1 : add view
-            //AdView mAdView = (AdView) findViewById(R.id.adView);
+            //delete this line for release version
+            MobileAds.setRequestConfiguration(configuration);
             //AdMob 2 : initialize
-            //MobileAds.initialize(getApplicationContext(), "ca-app-pub-3940256099942544~3347511713");
             MobileAds.initialize(this, new OnInitializationCompleteListener() {
                 @Override
                 public void onInitializationComplete(InitializationStatus initializationStatus) {
                 }
             });
-            //AdMob 3 : request and load an ad
-            // AdRequest adRequest = new AdRequest.Builder().build();
-            //mAdView.loadAd(adRequest);
+
+
         }, 600);
+    }
+
+    //onRestart is called after onStop
+
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        //Toast.makeText(MainActivity.this, "onRestart()", Toast.LENGTH_LONG).show();
+        //getCurrentFocus().clearFocus();
+        alrmtyped = findViewById(R.id.alarmtyped);
+        alrmtyped.clearFocus();
+        // hideSoftKeyboard(alrmtyped);
+        hideSoftwareKeyboard(this);
+        //closeKeyboard();
 
 
     }
 
-    public class AppLifecycleObserver implements LifecycleObserver {
+    @Override
+    protected void onStop() {
+        super.onStop();
+//
+//        appLifecycleObserver.onEnterBackground();
 
-        //public  final String TAG = pl.op.danex11.alarmscalculator840c.AppLifecycleObserver.class.getName();
+        //lad new ad when app is not visible
+        AdView mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
 
-        @OnLifecycleEvent(Lifecycle.Event.ON_START)
-        public void onEnterForeground() {
-            //run the code we need
-            closeKeyboard();
-            alrmtyped = findViewById(R.id.alarmtyped);
-            View current = getCurrentFocus();
-            if (current != null) current.clearFocus();
-            // hideSoftKeyboard(alrmtyped);
+//
+//        View current = getCurrentFocus();
+//        if (current != null) current.clearFocus();
+        //prevent keyboard staying onscreen when minimalized
+//        hideSoftKeyboard(alrmtyped);
+//        closeKeyboard();
 
-        }
+        // Check if no view has focus:
+//        View view = this.getCurrentFocus();
+//        if (view != null) {
+//            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+//            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);}
 
+
+    }
+
+
+//    public class AppLifecycleObserver implements LifecycleObserver {
+//
+//        //public  final String TAG = pl.op.danex11.alarmscalculator840c.AppLifecycleObserver.class.getName();
+//
+//        @OnLifecycleEvent(Lifecycle.Event.ON_START)
+//        public void onEnterForeground() {
+//            // Toast.makeText(MainActivity.this, "onEnterForeground()", Toast.LENGTH_LONG).show();
+//            //clearfocus
+//
+//            //run the code we need
+//            // closeKeyboard();
+//            //clear focus
+//            // alrmtyped = findViewById(R.id.alarmtyped);
+//            // View current = getCurrentFocus();
+//            //  if (current != null) current.clearFocus();
+//            // hideSoftKeyboard(alrmtyped);
+//
+//        }
+//
 //        @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
 //        public void onEnterBackground() {
+//          //  Log.w("logtag", "onEnterBackground");
+//         //   alrmtyped = findViewById(R.id.alarmtyped);
+////            alrmtyped.setInputType(InputType.TYPE_CLASS_NUMBER);
+//            //getCurrentFocus().clearFocus();
+//            //closeKeyboard();
+//            //hideSoftKeyboard(alrmtyped);
+////            closeKeyboard();
+////            alrmtyped = findViewById(R.id.alarmtyped);
+////            View current = getCurrentFocus();
+////            if (current != null) current.clearFocus();
 //            //run the code we need
 //        }
+//
+//    }
 
-    }
+
 }

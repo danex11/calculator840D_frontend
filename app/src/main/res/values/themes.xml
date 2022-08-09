@@ -1,11 +1,10 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Theme.AlarmsCalculator840C" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <item name="android:windowBackground">@drawable/rectangle_sim_very_dark_gray</item>
+        <item name="android:windowBackground">@drawable/logoplate</item>
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/sim_very_dark_gray</item>
+        <item name="colorPrimary">@color/case_graygreen</item>
         <item name="colorPrimaryVariant">@color/case_graygreen</item>
-        <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
         <item name="colorSecondaryVariant">@color/teal_700</item>

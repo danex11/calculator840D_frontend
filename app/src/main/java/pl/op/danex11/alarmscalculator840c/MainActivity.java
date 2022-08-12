@@ -23,12 +23,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
-import com.google.android.gms.ads.RequestConfiguration;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.Objects;
 
 
@@ -46,9 +43,9 @@ public class MainActivity extends AppCompatActivity {
     EditText alrmtyped;
     FrameLayout framelayout;
 
-    List<String> testDeviceIds = Arrays.asList("BE1C908D4C08BF07D2D06FB52FFC9020");
-    RequestConfiguration configuration =
-            new RequestConfiguration.Builder().setTestDeviceIds(testDeviceIds).build();
+//    List<String> testDeviceIds = Arrays.asList("BE1C908D4C08BF07D2D06FB52FFC9020");
+//    RequestConfiguration configuration =
+//            new RequestConfiguration.Builder().setTestDeviceIds(testDeviceIds).build();
 
     public static void hideSoftwareKeyboard(Activity activity) {
         InputMethodManager inputMethodManager =
@@ -207,13 +204,13 @@ public class MainActivity extends AppCompatActivity {
                 "mailto", "alarmscalc840d.userreport@gmail.com", null));
         intent.putExtra(Intent.EXTRA_SUBJECT, getResources().getString(R.string.emsubject));
         intent.putExtra(Intent.EXTRA_TEXT, getResources().getString(R.string.emmessage));
-        startActivity(Intent.createChooser(intent, "Choose an Email client to report bugs and observations:"));
+        startActivity(Intent.createChooser(intent, "Report bugs and observations via email:"));
     }
 
 
     public void loadCoffee(View view) {
         Intent myWebLink = new Intent(android.content.Intent.ACTION_VIEW);
-        myWebLink.setData(Uri.parse("https://buycoffee.to/danex11"));
+        myWebLink.setData(Uri.parse(getResources().getString(R.string.coffeelink)));
         startActivity(myWebLink);
     }
 
@@ -268,7 +265,7 @@ public class MainActivity extends AppCompatActivity {
             framelayout.setTranslationZ(-10);
 
             //delete this line for release version
-            MobileAds.setRequestConfiguration(configuration);
+//            MobileAds.setRequestConfiguration(configuration);
             //AdMob 2 : initialize
             MobileAds.initialize(this, new OnInitializationCompleteListener() {
                 @Override

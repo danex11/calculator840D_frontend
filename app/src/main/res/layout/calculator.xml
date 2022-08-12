@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/calculatorlayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/calculatorlayout"
     android:focusable="true"
     android:focusableInTouchMode="true"
     android:windowSoftInputMode="stateVisible">
@@ -102,17 +102,6 @@
         app:layout_constraintStart_toStartOf="@+id/background"
         app:layout_constraintTop_toTopOf="@+id/background" />
 
-    <FrameLayout
-        android:id="@+id/framelayout"
-        android:layout_width="0dp"
-        android:layout_height="1000dp"
-        android:layout_marginTop="28dp"
-        android:onClick="removeInfo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-    </FrameLayout>
-
     <ImageButton
         android:id="@+id/buttoncoffee"
         style="@android:style/Widget.DeviceDefault.ImageButton"
@@ -188,12 +177,27 @@
         app:layout_constraintTop_toBottomOf="@+id/background"
         app:srcCompat="@drawable/bugg" />
 
+    <FrameLayout
+        android:id="@+id/framelayout"
+        android:layout_width="wrap_content"
+        android:layout_height="1000dp"
+        android:layout_marginTop="24dp"
+        android:elevation="21dp"
+        android:onClick="removeInfo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </FrameLayout>
+
     <com.google.android.gms.ads.AdView
         android:id="@+id/adView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
+        android:elevation="22dp"
         app:adSize="SMART_BANNER"
         app:adUnitId="ca-app-pub-9180007219356993/7676192654"
         app:layout_constraintBottom_toBottomOf="parent"

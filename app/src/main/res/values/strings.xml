@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?><!-- version-->
-<!DOCTYPE resources [<!ENTITY vers "0.0.3">]>
+<!DOCTYPE resources [<!ENTITY vers "0.0.4">]>
 
 <resources>
-    <string name="app_name">Alarms Calculator 840D</string>
-    <string name="version">&vers;</string>
-    <string name="versionVRS">&vers;.VRS </string>
-    <string name="todo">TODO</string>
-    <string name="info">"
+    <string name="app_name" translatable="false">Alarms Calculator 840D</string>
+    <string name="version" translatable="false">&vers;</string>
+    <string name="versionVRS" translatable="false">&vers;.VRS </string>
+    <string name="todo" translatable="false">TODO</string>
+    <string name="info" translatable="false">"
 To calculate alarm: type it into red rectangle and confirm.
 Result will be shown in an orange rectangle.
 It assumes that bitExtended is set to "false".
@@ -18,7 +18,8 @@ Report problems, bugs and suggestion with \"Bug\" button.
         Have a nice day at work!
         danex11"
     </string>
-    <string name="emmessage">This is my observation:</string>
-    <string name="emsubject">do not modify email subject [CODE::840Df171098aFb9012667846ecE5fA]</string>
-    <string name="dialogemail">Choose an Email client to report bugs and observations:</string>
+    <string name="emmessage" translatable="false">This is my observation:</string>
+    <string name="emsubject" translatable="false">do not modify email subject [CODE::840Df171098aFb9012667846ecE5fA]</string>
+    <string name="dialogemail" translatable="false">Choose an Email client to report bugs and observations:</string>
+    <string name="coffeelink">https://www.buymeacoffee.com/danex11</string>
 </resources>

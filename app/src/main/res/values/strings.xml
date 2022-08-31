@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?><!-- version-->
-<!DOCTYPE resources [<!ENTITY vers "0.0.4">]>
+<!DOCTYPE resources [<!ENTITY vers "0.0.5">]>
 
 <resources>
     <string name="app_name" translatable="false">Alarms Calculator 840D</string>
@@ -10,11 +10,12 @@
 To calculate alarm: type it into red rectangle and confirm.
 Result will be shown in an orange rectangle.
 It assumes that bitExtended is set to "false".
-Supports alarms starting with 50, 60, 70.
+Supports alarms starting with 5_, 60, 70.
 Report problems, bugs and suggestion with \"Bug\" button.
 
         Like this app? Rate it on Playstore.
         Support me with \"Buy me a coffee\" button :)
+        Thanks for testing.
         Have a nice day at work!
         danex11"
     </string>

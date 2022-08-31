@@ -163,7 +163,7 @@ public class MainActivity extends AppCompatActivity {
 
         String digs56 = alarmtyped.substring(4, 6);
         Log.w("logtag", "digs56 " + digs56);
-        if ((digs12.equals("70") && Integer.parseInt(digs56) > 31)
+        if ((digs12.equals("70") && Integer.parseInt(digs56) > 63)
                 ||
                 (digs12.equals("60") && Integer.parseInt(digs56) > 15)
                 ||
